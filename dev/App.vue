@@ -19,7 +19,10 @@
       <v-container fluid>
         <v-row>
           <v-col cols="12">
-            YOUR CUSTOM COMPONENT SHOULD GO HERE <v-icon :icon="icons.check" color="success" />
+            YOUR CUSTOM COMPONENT SHOULD GO HERE JACK <v-icon
+              :icon="icons.check"
+              color="success"
+            />
           </v-col>
         </v-row>
       </v-container>
