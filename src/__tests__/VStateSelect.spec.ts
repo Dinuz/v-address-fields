@@ -1,7 +1,7 @@
 import Vue from 'vue'
 // Utils
 import { mount, MountOptions, Wrapper } from '@vue/test-utils'
-//import { inspect } from 'util' // okay to delete this line if you don't use node inspect
+// import { inspect } from 'util' // okay to delete this line if you don't use node inspect
 
 // Component to be tested
 import VAddressFields, { VStateSelect } from '..'
@@ -25,9 +25,9 @@ const vuetifyMocks = {
 const foo = 'bar'
 const messages = []
 
-describe('YourComponent', () => {
+describe('VStateSelect', () => {
   describe('installer', () => {
-    it('should register the your-component component', () => {
+    it('should register the v-state-select component', () => {
       Vue.use(VAddressFields)
       expect(Vue.options.components['v-state-select']).toBeTruthy()
     })
@@ -60,38 +60,35 @@ describe('YourComponent', () => {
       })
 
       it('should render component and match snapshot', () => {
-        const wrapper = mountFunction({
-          propsData: { foo },
-        })
+        const wrapper = mountFunction()
         // replace the auto-generated `id` with one that matches
         const html = wrapper.html().replace(/div id="input-\d+"/, 'div id="input-1"')
         expect(html).toMatchSnapshot()
       })
 
-      it('should have a property called `foo`', () => {
-        const wrapper = mountFunction({ propsData: { foo } })
-        expect(wrapper.vm.foo).toBeDefined()
-        expect(wrapper.vm.foo).toBe('bar')
+      it('should have a property called <code>contiguousOnly</code> that defaults to <code>false</code>', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.contiguousOnly).toBeDefined()
+        expect(wrapper.vm.contiguousOnly).toBe(false)
+      })
+
+      it('should have a property called <code>exclude</code> that defaults to an empty array', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.exclude).toBeDefined()
+        expect(wrapper.vm.exclude).toStrictEqual([])
+      })
+
+      it('should have a property called <code>includeTerritories</code> that defaults to <code>false</code>', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.includeTerritories).toBeDefined()
+        expect(wrapper.vm.includeTerritories).toBe(false)
       })
     })
 
-    describe('internal functions and events', () => {
-      // @ts-ignore
-      let wrapper
-      beforeEach(() => {
-        // capture console.warn
-        const capture = (m: { toString: () => any }) => { messages.push(m.toString()) }
-        jest.spyOn(global.console, 'warn').mockImplementation(capture)
-        wrapper = mountFunction({
-          propsData: { foo },
-        })
-      })
-
-      it('bar() should return "baz"', () => {
-        // @ts-ignore
-        const result = wrapper.vm.bar()
-        expect(result).toBe('baz')
-      })
+    it('should generate a list of 51 "state" items', () => {
+      const wrapper = mountFunction({ propsData: { foo } })
+      expect(wrapper.vm.allItems).toBeDefined()
+      expect(wrapper.vm.allItems).toHaveLength(51)
     })
   })
 })

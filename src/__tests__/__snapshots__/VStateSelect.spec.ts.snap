@@ -1,13 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`YourComponent component initialization should render component and match snapshot 1`] = `
-<div class="v-input theme--light v-text-field">
+exports[`VStateSelect component initialization should render component and match snapshot 1`] = `
+<div class="v-input theme--light v-text-field v-select v-autocomplete v-state-select">
   <div class="v-input__control">
-    <div class="v-input__slot">
-      <div class="v-text-field__slot">
+    <div role="combobox"
+         aria-haspopup="listbox"
+         aria-expanded="false"
+         aria-owns="list-1"
+         class="v-input__slot"
+    >
+      <div class="v-select__slot">
         <input id="input-1"
                type="text"
+               autocomplete="off"
         >
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon notranslate material-icons theme--light"
+            >
+              $dropdown
+            </i>
+          </div>
+        </div>
+        <input type="hidden">
+      </div>
+      <div class="v-menu"
+           offsety="true"
+      >
       </div>
     </div>
     <div class="v-text-field__details">
