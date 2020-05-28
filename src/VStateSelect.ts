@@ -1,5 +1,6 @@
 // Imported Types
 /// <reference path="../node_modules/vuetify/src/globals.d.ts" />
+// @ts-ignore
 import Vue from 'vue'
 // import { VuetifyThemeVariant } from 'vuetify/types/services/theme'
 // import { ElementStyles } from '../types'
@@ -16,10 +17,10 @@ import './VStateSelect.sass'
  *             or replace it with the component you want to extend.
  */
 // @ts-ignore
-import { VTextField } from 'vuetify/lib'
+import { VAutocomplete } from 'vuetify/lib'
 
 // Create Base Mixins and Define Custom Properties
-const base = Vue.extend({ mixins: [VTextField] })
+const base = Vue.extend({ mixins: [VAutocomplete] })
 interface options extends InstanceType<typeof base> {
   /**
    * !Props unique to YourComponent
