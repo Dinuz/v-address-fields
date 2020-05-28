@@ -19,7 +19,15 @@
       <v-container fluid>
         <v-row>
           <v-col cols="12">
-            <v-state-select v-model="state" />
+            <p>
+              Selected state: {{ state }}
+            </p>
+            <v-state-select
+              v-model="state"
+              include-territories
+              hint="Type or select from the dropdown"
+              label="State of Residence"
+            />
             <v-icon
               :icon="icons.check"
               color="success"
@@ -38,7 +46,7 @@
       icons: {
         check: mdiCheck,
       },
-      state: null,
+      state: 'NY',
     }),
   }
 </script>

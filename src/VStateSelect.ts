@@ -13,11 +13,6 @@ import { UsaStates } from 'usa-states'
 // Styles
 import './VStateSelect.sass'
 
-/**
- * !IMPORTANT: Import the Vuetify components you plan to extend here.
- *             VTextField is left here as an example. You should remove
- *             or replace it with the component you want to extend.
- */
 // @ts-ignore
 import { VAutocomplete } from 'vuetify/lib'
 
@@ -25,41 +20,48 @@ import { VAutocomplete } from 'vuetify/lib'
 const base = Vue.extend({ mixins: [VAutocomplete] })
 interface options extends InstanceType<typeof base> {
   /**
-   * !Props unique to YourComponent
-   * Add properties of your project that TypeScript should know
-   * about here.
+   * !Props unique to VStateSelect
    */
-  foo: string
-
-  /**
-   * !Props inherited from VAutocomplete
-   */
-  items: Object[]
+  contiguousOnly: boolean
+  exclude: string[]
+  includeTerritories: boolean
 }
 
-// Extend VTextField to define the YourComponent component
+// Extend VAutocomplete to define the VStateSelect component
 export default base.extend<options>().extend({
   name: 'v-state-select',
   props: {
-    foo: {
-      type: String,
-      default: 'bar',
+    contiguousOnly: {
+      type: Boolean,
+      default: false,
+    },
+    exclude: {
+      type: Array,
+      default: () => [],
+    },
+    includeTerritories: {
+      type: Boolean,
+      default: false,
     },
   },
-  data: () => ({
-    usaStates: new UsaStates(),
-  }),
-  computed: {},
-  watch: {},
-  mounted () {
-    this.items = this.usaStates.format({
-      $text: 'name',
-      $value: 'abbr',
-    })
-  },
-  methods: {
-    bar () {
-      return 'baz'
+  computed: {
+    allItems (): object[] {
+      const { contiguousOnly, exclude, includeTerritories } = this
+      const usaStates = new UsaStates({
+        contiguousOnly,
+        exclude,
+        includeTerritories,
+      })
+      return usaStates.format({
+        $text: 'name',
+        $value: 'abbr',
+      })
+    },
+    classes (): object {
+      return {
+        ...VAutocomplete.options.computed.classes.call(this),
+        'v-state-select': true,
+      }
     },
   },
 })
