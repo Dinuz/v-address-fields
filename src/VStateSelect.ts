@@ -7,6 +7,8 @@ import Vue from 'vue'
 
 // 3rd Party Libs
 // import merge from 'deepmerge' // EXAMPLE; You can remove this if you have no 3rd party libs
+// @ts-ignore
+import { UsaStates } from 'usa-states'
 
 // Styles
 import './VStateSelect.sass'
@@ -30,28 +32,9 @@ interface options extends InstanceType<typeof base> {
   foo: string
 
   /**
-   * !Props that **should** have been inherited from VTextField
-   * If TypeScript complains about a property not being defined,
-   * even though it is clearly defined on the component you're
-   * extending, you can list it here and the error will go away.
-   *
-   * You can remove the ones below if you're not extending VTextField
-   * or you don't use them in your component.
+   * !Props inherited from VAutocomplete
    */
-  autofocus: boolean
-  color: string|null
-  computedId: string
-  disabled: boolean
-  errorBucket: string[]
-  iconStyle: 'default'|'solid'
-  isDark: boolean
-  isFocused: boolean
-  labelWidth: number|string
-  lazyValue: any
-  loaderHeight: number|string
-  loading: string|boolean
-  outlined: boolean
-  $vuetify: any // VuetifyObject // importing this type from Vuetify causes errors for some reason
+  items: Object[]
 }
 
 // Extend VTextField to define the YourComponent component
@@ -64,10 +47,16 @@ export default base.extend<options>().extend({
     },
   },
   data: () => ({
+    usaStates: new UsaStates(),
   }),
   computed: {},
   watch: {},
-  mounted () {},
+  mounted () {
+    this.items = this.usaStates.format({
+      $text: 'name',
+      $value: 'abbr',
+    })
+  },
   methods: {
     bar () {
       return 'baz'
