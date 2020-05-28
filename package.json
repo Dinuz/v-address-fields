@@ -1,6 +1,6 @@
 {
   "name": "v-address-fields",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "A Vue.js plugin providing components to collect address information extending the Vuetify UI library.",
   "author": "Massi",
   "license": "MIT",
@@ -98,7 +98,7 @@
     "rimraf": "^3.0.0",
     "sass": "^1.22.10",
     "sass-loader": "^7.2.0",
-    "semantic-release": "^15.13.21",
+    "semantic-release": "^17.0.8",
     "shelljs": "^0.8.3",
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^1.4.1",
